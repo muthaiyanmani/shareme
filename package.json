@@ -9,13 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "https-proxy-agent": "^7.0.6",
+    "mime-types": "^2.1.35",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "uuid": "^11.0.5",
     "zcatalyst-sdk-node": "^3.0.0-beta.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/mime-types": "^2.1.4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
