@@ -3,25 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack --port $X_ZOHO_CATALYST_LISTEN_PORT",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port $X_ZOHO_CATALYST_LISTEN_PORT",
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "zcatalyst-sdk-node": "^3.0.0-beta.5"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "zcatalyst-cli": "^1.17.6"
   }
 }

@@ -1,0 +1,10 @@
+{
+	"command": "npm run dev",
+	"build_path": "/Users/muthaiya-13966/Documents/playground/shareme/my-app",
+	"stack": "node20",
+	"catalyst_auth": true,
+	"login_redirect": "/",
+	"env_variables": {},
+	"memory": 2048,
+	"scripts": {}
+}
