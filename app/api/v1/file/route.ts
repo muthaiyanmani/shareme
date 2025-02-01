@@ -22,23 +22,25 @@ async function POST(req: NextRequest) {
 
     try {
         const bucketName = process.env.STRATUS_BUCKET_NAME!;
+        const tableId = process.env.FILE_META_TABLE_ID!;
         const objectTtl = process.env.UNAUTH_OBJECT_TTL || 60 * 60 * 24;
 
         const headers = Object.fromEntries(req.headers.entries());
         const fileName = req.headers.get('x-file-name') || `file-${Date.now()}.zip`;
-        const filenameWithoutExtension = fileName.split('.').slice(0, -1).join('.');
-        const sanitizedFilename = filenameWithoutExtension.replace(/\./g, '_');
-        const fileExtension = fileName.split('.').pop() as string;
-        const objectKey = `${uuid()}.${fileExtension}`;
-        const objectOptions = { ttl: objectTtl as string, metaData: { name: sanitizedFilename } };
+        const keyPrefix = uuid();
+        const objectKey =`${keyPrefix}/${fileName}`;
 
-        console.log(objectOptions)
+
+        const objectOptions = { ttl: objectTtl as string };
+
         const app = catalyst.initialize({ headers });
+        const fileDetails = await app.datastore().table(tableId).insertRow({ ID: keyPrefix, FILE_NAME: fileName,IS_UPLOADED:true });
         await app.stratus().bucket(bucketName).putObject(objectKey, Buffer.from(fileData), objectOptions);
+        const responseData = {key: keyPrefix, file_name: fileName, ttl: objectTtl,uploaded_at: fileDetails?.CREATEDTIME};
 
         return new Response(JSON.stringify({
             status: "success",
-            data: "file uploaded successfully",
+            data: responseData,
         }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {
         console.error(error);
