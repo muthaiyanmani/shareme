@@ -26,11 +26,9 @@ export default function RootLayout({
       <body
         className={`${lato.className} antialiased`}
       >
-
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
           disableTransitionOnChange
         >
           {children}
