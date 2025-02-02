@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lato.className} antialiased bg-gradient-to-br from-blue-950 via-blue-900 to-blue-800`}
+        className={`${lato.className} antialiased relative min-h-screen bg-[url('/background.svg')] bg-cover bg-no-repeat bg-center`}
       >
         <ThemeProvider
           attribute="class"
@@ -34,11 +34,12 @@ export default function RootLayout({
           enableSystem={true}
           disableTransitionOnChange
         >
-         <div className="md:max-w-7xl max-w-sm mx-auto flex flex-col min-h-screen">
+         <div className="md:max-w-7xl max-w-sm mx-auto flex flex-col">
          <Header />
          <main className="flex-grow w-full">{children}</main>
-         <Footer />
+        
          </div>
+         <Footer />
         </ThemeProvider>
       </body>
     </html>

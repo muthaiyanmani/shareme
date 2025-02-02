@@ -101,12 +101,12 @@ export default function UploadFile() {
           <motion.div
             className="w-full h-full rounded-full bg-gradient-to-br from-blue-800/30 via-blue-700/20 to-blue-600/10"
             animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+            transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
           />
           <motion.div
             className="absolute w-3/4 h-3/4 rounded-full bg-gradient-to-tl from-blue-800/30 via-blue-700/20 to-blue-600/10"
             animate={{ scale: [1.1, 1, 1.1] }}
-            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+            transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
           />
         </div>
 
@@ -114,7 +114,7 @@ export default function UploadFile() {
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative">
 
-            <svg className="w-32 h-32 text-blue-600" viewBox="0 0 100 100">
+            <svg className="md:w-28 md:h-28 text-blue-600" viewBox="0 0 100 100">
               <motion.circle
                 cx="50"
                 cy="50"
@@ -124,7 +124,7 @@ export default function UploadFile() {
                 strokeWidth="1"
                 strokeDasharray="4 4"
                 animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
                 className="origin-center"
               />
             </svg>
