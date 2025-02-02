@@ -1,12 +1,12 @@
 import FileNotFound from "@/components/file-not-found";
 import { headers } from "next/headers";
 import catalyst from "zcatalyst-sdk-node";
-import { FileIcon, defaultStyles, DefaultExtensionType } from "react-file-icon";
+import { FileIcon, defaultStyles } from "react-file-icon";
 import { formatFileSize } from "@/lib/format-size";
 import { Download } from "lucide-react";
 
 export default async function GetFilePage({
-    params, ...props
+    params
 }: {
     params: Promise<{ fileId: string }>
 }) {
@@ -44,6 +44,7 @@ export default async function GetFilePage({
             <a href={`${objectMeta.object_url}?responseContentDisposition=attachment;filename="${fileDetails?.FILE_NAME}"`} download className="text-yellow-500 flex item gap-2"> <Download /> Download</a>
         </div>
     } catch (e) {
-
+        console.error(e);
+        return <FileNotFound />
     }
 }

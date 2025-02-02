@@ -2,11 +2,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useRouter } from 'next/navigation'
-import { Check, CircleX, Copy, Folder, Link, Upload } from 'lucide-react';
-import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
+import { Check, CircleX, Copy, Folder } from 'lucide-react';
+import { AlertDialog, AlertDialogContent, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
@@ -22,8 +20,6 @@ export default function UploadFile() {
   const [shareLink, setShareLink] = useState('');
   const [copied, setCopied] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-
-  const router = useRouter()
 
   const copyToClipboard = async () => {
     try {

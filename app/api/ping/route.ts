@@ -1,8 +1,6 @@
 
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import catalyst from "zcatalyst-sdk-node";
-import { RefreshTokenCredential } from "zcatalyst-sdk-node/lib/utils/credential";
 
 async function GET(req: NextRequest) {
     console.log('Request strartew234d');
@@ -48,7 +46,7 @@ try {
         // }
 //    console.log(typeof req.headers);
 
-  const app = catalyst.initialize({headers} as any);
+  const app = catalyst.initialize({headers});
    const user = await app.userManagement().getCurrentUser();
 
    console.log("user : ", user);

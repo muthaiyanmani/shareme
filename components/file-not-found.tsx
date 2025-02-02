@@ -1,5 +1,4 @@
-import { FolderX, Unlink } from "lucide-react";
-import { Button } from "./ui/button";
+import { Unlink } from "lucide-react";
 import Link from "next/link";
 
 export default function FileNotFound() {

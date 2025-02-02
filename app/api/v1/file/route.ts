@@ -1,13 +1,8 @@
-import { File } from "buffer";
+
 import { NextRequest, NextResponse } from "next/server";
 import catalyst from "zcatalyst-sdk-node";
-import mimeType from "mime-types";
 import { v4 as uuid } from "uuid";
 
-
-async function GET(req: NextRequest) {
-
-}
 
 async function POST(req: NextRequest) {
 
@@ -53,4 +48,4 @@ async function POST(req: NextRequest) {
 
 }
 
-export { GET, POST };
+export { POST };

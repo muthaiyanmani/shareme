@@ -1,9 +1,5 @@
 import UploadFile from "@/components/upload-file";
 import { LoginForm } from "@/components/login-form";
-import { ModeToggle } from "@/components/mode-toggle";
-import { GalleryVerticalEnd, Share2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 
 
 export default function HomePage() {

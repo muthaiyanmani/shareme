@@ -22,7 +22,7 @@ async function POST(req: NextRequest) {
     
         const app = catalyst.initialize({ headers }, {scope:"admin"});
         await app.datastore().table(tableId).insertRow({ ID: keyPrefix, FILE_NAME: fileName,IS_UPLOADED:false });
-        const signedUrl:any = await app.stratus().bucket(bucketName).generatePreSignedUrl(objectKey,"PUT",{ expiryIn: `${5*60}` });
+        const signedUrl:Record<string, string> = await app.stratus().bucket(bucketName).generatePreSignedUrl(objectKey,"PUT",{ expiryIn: `${5*60}` });
         const responseData = {key: keyPrefix, file_name: fileName, signed_url: signedUrl?.signature};
 
         return new Response(JSON.stringify({
