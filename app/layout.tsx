@@ -31,6 +31,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
+          enableSystem={true}
           disableTransitionOnChange
         >
          <div className="md:max-w-7xl max-w-sm mx-auto flex flex-col min-h-screen">

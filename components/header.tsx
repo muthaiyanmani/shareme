@@ -1,5 +1,6 @@
-import {  Share2, Star } from "lucide-react";
+import { Share2, Star } from "lucide-react";
 import Link from "next/link";
+import { ModeToggle } from "./mode-toggle";
 
 
 export default function Header() {
@@ -11,6 +12,9 @@ export default function Header() {
             <h2 className="font-bold  md:text-lg">ShareMe</h2>
         </Link>
 
-        <a href="https://github.com/muthaiyanmani/shareme" target="_blank" className="hidden md:flex items-center gap-2">Github <Star className="w-4 h-4"/></a>
+        <div className="flex items-center gap-4">
+            <a href="https://github.com/muthaiyanmani/shareme" target="_blank" className="hidden md:flex items-center gap-2">Github <Star className="w-4 h-4" /></a>
+            <ModeToggle />
+        </div>
     </div>
 }

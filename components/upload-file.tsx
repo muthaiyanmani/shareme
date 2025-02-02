@@ -150,7 +150,7 @@ export default function UploadFile() {
                     </ul>
                   </div>
                 }
-                <p className='my-2'>Uploading {progress} </p>
+                <p className='my-2'>Uploading {progress}% </p>
                 <Progress value={progress} className='bg-white' />
               </div>) : <><p className="text-blue-50 text-md mb-2">Drag and drop your files here.</p>
               <p className="text-blue-300">
