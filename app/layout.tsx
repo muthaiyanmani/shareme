@@ -33,9 +33,9 @@ export default function RootLayout({
           defaultTheme="system"
           disableTransitionOnChange
         >
-         <div className="md:max-w-7xl mx-auto flex flex-col min-h-screen">
+         <div className="md:max-w-7xl max-w-sm mx-auto flex flex-col min-h-screen">
          <Header />
-          <main className="flex-grow w-full">{children}</main>
+         <main className="flex-grow w-full">{children}</main>
          <Footer />
          </div>
         </ThemeProvider>

@@ -11,6 +11,6 @@ export default function Header() {
             <h2 className="font-bold  md:text-lg">ShareMe</h2>
         </Link>
 
-        <a href="#" className="flex items-center gap-2">Github <Star className="w-4 h-4"/></a>
+        <a href="https://github.com/muthaiyanmani/shareme" target="_blank" className="hidden md:flex items-center gap-2">Github <Star className="w-4 h-4"/></a>
     </div>
 }
