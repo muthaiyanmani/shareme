@@ -1,9 +1,9 @@
 "use client"
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation'
-import { Check, CircleX, Copy, Link, Upload } from 'lucide-react';
+import { Check, CircleX, Copy, Folder, Link, Upload } from 'lucide-react';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from './ui/alert-dialog';
 import { AlertDialogDescription } from '@radix-ui/react-alert-dialog';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
@@ -11,6 +11,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Progress } from './ui/progress';
+import { formatFileSize } from '@/lib/format-size';
 
 
 export default function UploadFile() {
@@ -28,7 +29,10 @@ export default function UploadFile() {
     try {
       await navigator.clipboard.writeText(shareLink)
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000) // Reset copied state after 2 seconds
+      setTimeout(() => {
+        setCopied(false);
+        // setOpenDialog(false)
+      }, 2000) // Reset copied state after 2 seconds
     } catch (err) {
       console.error("Failed to copy text: ", err)
     }
@@ -88,50 +92,110 @@ export default function UploadFile() {
   }
 
   return (
-    <div className="flex justify-center rounded-full items-center h-full flex-col">
-      <motion.div
+    <div className=" w-full flex flex-col items-center justify-center p-4">
+
+      <div
         {...getRootProps()}
-        className={`w-48 h-48 rounded-full border-2 border-dashed border-slate-500 flex justify-center items-center cursor-pointer bg-slate-200 relative overflow-hidden ${isUploading ? 'pointer-events-none opacity-50' : ''}`}
-        animate={{
-          scale: isDragging ? 1.1 : 1,
-          borderWidth: isDragging ? '4px' : '2px',
-        }}
-        transition={{ duration: 0.3 }}
+        className="relative w-full max-w-lg aspect-square flex flex-col items-center justify-center cursor-pointer"
       >
-        <input disabled={openDialog} type='file' {...getInputProps()} />
-        {
-          isUploading ? (
-            <div className="absolute w-full h-full bg-slate-200 bg-opacity-70 flex justify-center items-center flex-col gap-4">
-              <div className='flex'>
-                <Upload />
-                <p className="text-slate-800 ml-2 font-medium">Uploading</p>
-              </div>
-              <div className='w-full px-4 lg:px-8 flex items-center gap-2'>
-                <Progress value={progress} />
-                <p className="text-slate-800 ml-2 font-medium">{progress}%</p>
-              </div>
+        <input disabled={openDialog} {...getInputProps()} />
+
+        {/* Animated circles background */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            className="w-full h-full rounded-full bg-gradient-to-br from-blue-800/30 via-blue-700/20 to-blue-600/10"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+          />
+          <motion.div
+            className="absolute w-3/4 h-3/4 rounded-full bg-gradient-to-tl from-blue-800/30 via-blue-700/20 to-blue-600/10"
+            animate={{ scale: [1.1, 1, 1.1] }}
+            transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+          />
+        </div>
+
+        {/* Dotted circle and content */}
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="relative">
+
+            <svg className="w-32 h-32 text-blue-600" viewBox="0 0 100 100">
+              <motion.circle
+                cx="50"
+                cy="50"
+                r="45"
+                fill="none"
+                stroke="#60a5fa"
+                strokeWidth="1"
+                strokeDasharray="4 4"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                className="origin-center"
+              />
+            </svg>
+
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Folder className="w-8 h-8 text-blue-300" />
             </div>
-          ) : isDragging ? (
-            <p className="text-slate-800 font-medium">Drop the files here...</p>
-          ) : (
-            <p className="text-slate-700 font-medium">Drag & drop files here</p>
-          )
-        }
+          </div>
+
+          <div className="mt-6 text-center">
+            {isUploading ? (
+              <div className='text-white text-center'>
+
+                {!!uploadedFiles.length &&
+                  <div className="mt-5 text-center">
+                    <ul className="list-none p-0">
+                      {uploadedFiles.map((file, index) => (
+                        <li key={index} className="flex items-center gap-1 overflow-hidden">
+                         <span className="truncate block w-24 md:w-40">{file.name}</span>
+                         <span className="text-xs text-gray-400">({formatFileSize(file.size)})</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                <p className='my-2'>Uploading... </p>
+                <Progress value={progress} className='bg-white' />
+              </div>) : <><p className="text-blue-50 text-md mb-2">Drag and drop your files here.</p>
+              <p className="text-blue-300">
+                Or,{" "}
+                <button className="text-blue-400 hover:text-blue-300 hover:underline focus:outline-none transition-colors">
+                  browse to upload.
+                </button>
+              </p>
+            </>
+            }
+          </div>
+        </div>
+
+
+        {/* Drag overlay */}
+        <AnimatePresence>
+          {isDragging && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-blue-400/10 rounded-full z-20"
+            />
+          )}
+        </AnimatePresence>
+
 
         <AlertDialog open={openDialog} >
           <AlertDialogContent>
             <AlertDialogHeader>
               <div className='flex items-center justify-between'>
-              <AlertDialogTitle>Share the link</AlertDialogTitle>
-              <CircleX onClick={closeModal} className='cursor-pointer'/>
+                <AlertDialogTitle>Share the link</AlertDialogTitle>
+                <CircleX onClick={closeModal} className='cursor-pointer' />
               </div>
+             
               <AlertDialogDescription>
                 <p className='text-sm'>Copy the link below and share it with your friends</p>
-
                 <br />
-
+               
                 <div className="flex items-center space-x-2 mt-2">
-                  <Input type="text" value={shareLink} className="flex-grow" disabled />
+                <Input type="text" value={shareLink} className="flex-grow" disabled />
                   <Button
                     onClick={copyToClipboard}
                     variant={"default"}
@@ -143,67 +207,10 @@ export default function UploadFile() {
                 </div>
               </AlertDialogDescription>
             </AlertDialogHeader>
+
           </AlertDialogContent>
-        
         </AlertDialog>
-
-        {/* Expanding Rings Animation */}
-        {isDragging && (
-          <>
-            <motion.div
-              className="absolute w-full h-full rounded-full border-2 border-slate-500"
-              animate={{
-                scale: 2,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-            <motion.div
-              className="absolute w-full h-full rounded-full border-2 border-slate-500"
-              animate={{
-                scale: 3,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 0.5,
-              }}
-            />
-            <motion.div
-              className="absolute w-full h-full rounded-full border-2 border-slate-500"
-              animate={{
-                scale: 4,
-                opacity: 0,
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: 1,
-              }}
-            />
-          </>
-        )}
-      </motion.div>
-
-      {!!uploadedFiles.length &&
-        <div className="mt-5 text-center">
-          <h4 className="text-slate-800">Uploaded File:</h4>
-          <ul className="list-none p-0">
-            {uploadedFiles.map((file, index) => (
-              <li key={index} className="text-slate-700">
-                {file.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      }
+      </div>
     </div>
   );
 };
