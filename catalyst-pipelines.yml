@@ -10,7 +10,9 @@ jobs:
         - pwd
         - npm install zcatalyst-cli -s --force
         - npm install --omit=dev --force
+        - ls -ltrh
         - npm run build
+
 stages:
   - name: shareme
     jobs:
