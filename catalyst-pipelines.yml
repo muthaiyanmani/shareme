@@ -8,7 +8,7 @@ jobs:
     steps:
         - echo "Initializing the deployment process..."
         - pwd
-        - npm install --force
+        - npm install --omit=dev --force
         - npm install zcatalyst-cli
 stages:
   - name: shareme
