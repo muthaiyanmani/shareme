@@ -8,7 +8,7 @@ jobs:
     steps:
         - echo "Initializing the deployment process..."
         - pwd
-        - ls ltrh
+        - ls -ltrh
 stages:
   - name: build
     jobs:
