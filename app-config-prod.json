@@ -1,0 +1,10 @@
+{
+	"command": "node .next/standalone/server.js  --port $X_ZOHO_CATALYST_LISTEN_PORT",
+	"build_path": ".",
+	"stack": "node20",
+	"catalyst_auth": true,
+	"login_redirect": "/",
+	"env_variables": {},
+	"memory": 2048,
+	"scripts": {}
+}
