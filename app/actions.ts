@@ -2,7 +2,7 @@
 import { headers } from "next/headers";
 import catalyst from "zcatalyst-sdk-node";
 
-export async function createUser(prevState: any, formData: FormData) {
+export async function createUser(prevState: unknown, formData: FormData) {
     
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
@@ -27,5 +27,5 @@ export async function createUser(prevState: any, formData: FormData) {
     const app = catalyst.initialize({ headers: reqHeaders });
     await app.userManagement().addUserToOrg(signupConfig,userConfig);
 
-    return { ...prevState, loading: false }
+    return { ...(prevState as Record<string, unknown>), loading: false }
 }

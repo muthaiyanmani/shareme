@@ -4,5 +4,13 @@
       "source": "./",
       "name": "shareme"
     }
-  ]
+  ],
+  "functions": {
+    "targets": [
+      "OnStratusObjectUpload",
+      "FilesStaleEntryRemoval"
+    ],
+    "ignore": [],
+    "source": "functions"
+  }
 }

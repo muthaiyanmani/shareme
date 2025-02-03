@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build && node copy-assets.js",
     "start": "next start --port $X_ZOHO_CATALYST_LISTEN_PORT",
+    "start:standalone":"node .next/standalone/server.js  --port $X_ZOHO_CATALYST_LISTEN_PORT",
     "lint": "next lint"
   },
   "dependencies": {

@@ -11,12 +11,19 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useActionState, useEffect, useState } from "react"
+import { useActionState, useState } from "react"
 import { createUser } from "@/app/actions"
-import Script from "next/script"
+
+// Extend the Window interface to include the catalyst property
+declare global {
+  interface Window {
+    catalyst: unknown;
+  }
+}
 
 
 const initialState = {
+  loading: false,
   errors: {}
 }
 export function LoginForm({
@@ -24,13 +31,13 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
 
-  const [state, formAction, pending] = useActionState(createUser, initialState);
+  const [, formAction, pending] = useActionState(createUser, initialState);
   const [isSignupTab, setSignupTab] = useState(true);
   
   const switchTab =() => {
     setSignupTab(prev => !prev);
 
-    window.catalyst.initApp({
+    (window.catalyst as any).initApp({
       project_Id : "4939000000052001", //No I18N
       zaid : "50024743074", //No I18N
       auth_domain : "https://accounts.zohoportal.in",
@@ -40,7 +47,7 @@ export function LoginForm({
       org_id: "60026071286" //No I18N
     });
     
-    window.catalyst.auth.signIn("signin-frame", {});
+    (window.catalyst as any).auth.signIn("signin-frame", {});
   }
 
   return (

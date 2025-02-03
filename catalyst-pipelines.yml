@@ -5,15 +5,23 @@ runners:
 jobs: 
   build:
     cwd: /catalyst
+version: 2.1
+runners:
+  slate:
+    config-id: 3
+jobs: 
+  build:
+    cwd: /catalyst
     steps:
         - echo "Initializing the deployment process..."
         - pwd
         - npm install zcatalyst-cli -s --force
         - npm install --force
-        - ls -ltrh
         - npm run build
 
 stages:
   - name: shareme
+  - name: shareme
     jobs:
+      - build
       - build
