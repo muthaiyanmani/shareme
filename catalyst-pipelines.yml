@@ -9,7 +9,7 @@ jobs:
         - echo "Initializing the deployment process..."
         - pwd
         - npm install zcatalyst-cli -s --force
-        - npm install --omit=dev --force
+        - npm install --force
         - ls -ltrh
         - npm run build
 
