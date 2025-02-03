@@ -17,7 +17,8 @@ jobs:
         - mkdir -p /tmp/catalyst/.next && cp -r .next/* /tmp/catalyst/.next
         - cp app-config-prod.json /tmp//catalyst/app-config.json
         - cd /tmp/catalyst
-        - ls -ltrh
+        - ls -latrh
+        - catalyst deploy
 
 stages:
   - name: shareme
