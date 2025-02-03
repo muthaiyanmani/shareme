@@ -6,8 +6,6 @@ jobs:
   build:
     cwd: /catalyst
     steps:
-        - echo "Initializing the deployment process..."
-        - pwd
         - echo "Installing the dependencies..."
         - npm install --force
         - echo "Building the app..."
