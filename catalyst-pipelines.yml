@@ -15,10 +15,11 @@ jobs:
         - npm run build
         - echo "Copying the build files to the deployment directory..."
         - mkdir -p /tmp/catalyst/.next && cp -r .next/* /tmp/catalyst/.next
-        - cp app-config-prod.json /tmp//catalyst/app-config.json
+        - cp app-config-prod.json /tmp/catalyst/app-config.json
+        - cp catalyst.json /tmp/catalyst/catalyst.json
         - cd /tmp/catalyst
         - ls -latrh
-        - catalyst deploy
+        - catalyst deploy appsail
 
 stages:
   - name: shareme
