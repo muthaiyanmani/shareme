@@ -18,7 +18,7 @@ jobs:
         - cp catalyst.json /tmp/catalyst/catalyst.json
         - cd /tmp/catalyst
         - npm install zcatalyst-cli -s --force
-        - npx catalyst deploy appsail
+        - npx catalyst deploy appsail --verbose
 
 stages:
   - name: shareme
