@@ -9,8 +9,16 @@ jobs:
         - echo "Initializing the deployment process..."
         - pwd
         - npm install zcatalyst-cli -s --force
+        - echo "Installing the dependencies..."
         - npm install --force
+        - echo "Building the app..."
         - npm run build
+        - echo "Copying the build files to the deployment directory..."
+        - cp -r .next /tmp
+        - cp app-config-prod.json /tmp
+        - mv app-config-prod.json app-config.json
+        - cd /tmp
+        - ls -ltrh
 
 stages:
   - name: shareme
