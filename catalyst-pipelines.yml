@@ -14,10 +14,9 @@ jobs:
         - echo "Building the app..."
         - npm run build
         - echo "Copying the build files to the deployment directory..."
-        - cp -r .next /tmp
-        - cp app-config-prod.json /tmp
-        - mv app-config-prod.json app-config.json
-        - cd /tmp
+        - mkdir -p /tmp/catalyst/.next && cp -r .next/* /tmp/catalyst/.next
+        - cp app-config-prod.json /tmp//catalyst/app-config.json
+        - cd /tmp/catalyst
         - ls -ltrh
 
 stages:
