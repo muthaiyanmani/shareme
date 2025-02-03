@@ -1,17 +1,14 @@
-version: 1.0
-jobs:
-  hello:
+version: 2.1
+runners:
+  slate:
+    config-id: 3
+jobs: 
+  build:
+    cwd: /catalyst
     steps:
-      - echo "Hello"
-  world:
-    steps:
-      - echo "World"
-  hello-world:
-    steps:
-      - echo "Hello World!"
+        - echo "Initializing the deployment process..."
+        - pwd
 stages:
   - name: build
     jobs:
-      - - hello
-        - world
-      - hello-world
+      - build
