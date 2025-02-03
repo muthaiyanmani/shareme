@@ -1,5 +1,5 @@
 {
-	"command": "node .next/standalone/server.js  --port $X_ZOHO_CATALYST_LISTEN_PORT",
+	"command": "node standalone/server.js  --port $X_ZOHO_CATALYST_LISTEN_PORT",
 	"build_path": ".",
 	"stack": "node20",
 	"catalyst_auth": true,
