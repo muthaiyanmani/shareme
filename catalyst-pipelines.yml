@@ -8,7 +8,6 @@ jobs:
     steps:
         - echo "Initializing the deployment process..."
         - pwd
-        - npm install zcatalyst-cli -s --force
         - echo "Installing the dependencies..."
         - npm install --force
         - echo "Building the app..."
@@ -18,8 +17,8 @@ jobs:
         - cp app-config-prod.json /tmp/catalyst/app-config.json
         - cp catalyst.json /tmp/catalyst/catalyst.json
         - cd /tmp/catalyst
-        - ls -latrh
-        - catalyst deploy appsail
+        - npm install zcatalyst-cli -s --force
+        - npx catalyst deploy appsail
 
 stages:
   - name: shareme
