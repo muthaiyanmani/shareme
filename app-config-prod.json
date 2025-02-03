@@ -1,5 +1,5 @@
 {
-	"command": "PORT=9000 node standalone/server.js",
+	"command": "node standalone/server.js",
 	"build_path": ".",
 	"stack": "node20",
 	"catalyst_auth": true,
