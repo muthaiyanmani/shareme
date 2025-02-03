@@ -1,5 +1,5 @@
 {
-	"command": "node standalone/server.js  --port $X_ZOHO_CATALYST_LISTEN_PORT",
+	"command": "PORT=9000 node standalone/server.js",
 	"build_path": ".",
 	"stack": "node20",
 	"catalyst_auth": true,
