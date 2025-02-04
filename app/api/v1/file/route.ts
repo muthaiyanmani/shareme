@@ -10,7 +10,7 @@ async function POST(req: NextRequest) {
 
     if (!fileData || fileData.byteLength === 0) {
         return NextResponse.json(
-            { status: "failure", message: 'Invalid file.' },
+            { status: "failure", data: { message: 'Invalid file.', code: "INVALID_FILE" } },
             { status: 400 }
         );
     }
@@ -23,15 +23,15 @@ async function POST(req: NextRequest) {
         const headers = Object.fromEntries(req.headers.entries());
         const fileName = req.headers.get('x-file-name') || `file-${Date.now()}.zip`;
         const keyPrefix = uuid();
-        const objectKey =`${keyPrefix}/${fileName}`;
+        const objectKey = `${keyPrefix}/${fileName}`;
 
 
         const objectOptions = { ttl: objectTtl as string };
 
         const app = catalyst.initialize({ headers });
-        const fileDetails = await app.datastore().table(tableId).insertRow({ ID: keyPrefix, FILE_NAME: fileName,IS_UPLOADED:true });
+        const fileDetails = await app.datastore().table(tableId).insertRow({ ID: keyPrefix, FILE_NAME: fileName, IS_UPLOADED: true });
         await app.stratus().bucket(bucketName).putObject(objectKey, Buffer.from(fileData), objectOptions);
-        const responseData = {key: keyPrefix, file_name: fileName, ttl: objectTtl,uploaded_at: fileDetails?.CREATEDTIME};
+        const responseData = { key: keyPrefix, file_name: fileName, ttl: objectTtl, uploaded_at: fileDetails?.CREATEDTIME };
 
         return new Response(JSON.stringify({
             status: "success",
@@ -41,7 +41,10 @@ async function POST(req: NextRequest) {
         console.error(error);
         return new Response(JSON.stringify({
             status: "failure",
-            message: "unable to upload file",
+            data: {
+                message: "unable to upload file",
+                code: "UPLOAD_FAILED"
+            }
         }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
 

@@ -10,6 +10,7 @@ import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { Progress } from './ui/progress';
 import { formatFileSize } from '@/lib/format-size';
+import { toast } from "sonner"
 
 
 export default function UploadFile() {
@@ -40,11 +41,27 @@ export default function UploadFile() {
 
     const fileName = acceptedFiles[0]?.name;
     const contentType = acceptedFiles[0]?.type;
-    const response = await fetch(`/api/v1/file/signed-url?file=${fileName}`, { method: "POST" });
-    const data = await response.json();
+    
+    let apiResp;
+    try {
+      const response = await fetch(`/api/v1/file/signed-url?file=${fileName}`, { method: "POST" });
 
-    const { signed_url: signedUrl, key } = data?.data;
+      if(!response.ok) {
+        const error = await response.json();
+        const errorData = error?.data;
+        
+        toast(errorData.code, {
+          description: errorData.message
+        })
+      }
+      apiResp = await response.json();
+    } catch (error) {
+      toast("UPLOAD_FAILED", {
+        description: (error as any)?.message
+      })
+    }
 
+    const { signed_url: signedUrl, key } = apiResp?.data;
     setIsUploading(true);
 
     const xhr = new XMLHttpRequest();
@@ -69,7 +86,9 @@ export default function UploadFile() {
       }
     };
 
-    xhr.onerror = () => alert("An error occurred during the upload.");
+    xhr.onerror = () => toast("UPLOAD_FAILED", {
+      description: "An error occurred during the upload."
+    })
 
     xhr.send(acceptedFiles[0]);
   }, []);

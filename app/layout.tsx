@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const lato = Lato({
   weight: ["300", "400", "700"],
@@ -40,6 +41,7 @@ export default function RootLayout({
         
          </div>
          <Footer />
+         <Toaster />
         </ThemeProvider>
       </body>
     </html>

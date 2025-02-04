@@ -8,7 +8,7 @@ async function POST(req: NextRequest) {
     if (!fileName) {
         return new Response(JSON.stringify({
             status: "failure",
-            message: 'invalid input value',
+            data:{message: 'Invalid input value', code: "INVALID_INPUT" }
         }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
@@ -34,7 +34,7 @@ async function POST(req: NextRequest) {
         if(isReqReached) {
             return new Response(JSON.stringify({
                 status: "failure",
-                message: "this ip has reached the rate limit",
+                data:{ message: "This ip has reached the rate limit", code: "RATE_LIMIT_EXCEEDED" }
             }), { status: 429, headers: { 'Content-Type': 'application/json' } });
         }else{
             console.log("putting the value in cache");
@@ -53,11 +53,9 @@ async function POST(req: NextRequest) {
         console.error(error);
         return new Response(JSON.stringify({
             status: "failure",
-            message: "unable to get the signed url",
+            data:{message: "unable to get the signed url", code:"SIGNED_URL_FAILED"}
         }), { status: 500, headers: { 'Content-Type': 'application/json' } });
     }
-   
-
 }
 
 export { POST };
