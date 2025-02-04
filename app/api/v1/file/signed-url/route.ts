@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 import catalyst from "zcatalyst-sdk-node";
 import { v4 as uuid } from "uuid";
-import { parse } from "path";
 
 async function POST(req: NextRequest) {
     const fileName = req.nextUrl.searchParams?.get('file');
