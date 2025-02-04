@@ -56,9 +56,7 @@ export default function UploadFile() {
       }
       apiResp = await response.json();
     } catch (error) {
-      toast("UPLOAD_FAILED", {
-        description: (error as any)?.message
-      })
+      console.error("Failed to get signed url: ", error);
     }
 
     const { signed_url: signedUrl, key } = apiResp?.data;
