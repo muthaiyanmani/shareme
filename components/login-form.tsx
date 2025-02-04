@@ -33,18 +33,23 @@ export function LoginForm({
 
   const [, formAction, pending] = useActionState(createUser, initialState);
   const [isSignupTab, setSignupTab] = useState(true);
+
+  const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+  const zaid = process.env.NEXT_PUBLIC_ZAID!;
+  const orgId = process.env.NEXT_PUBLIC_ORG_ID;
+  const authDomain = process.env.NEXT_PUBLIC_AUTH_DOMAIN;
   
   const switchTab =() => {
     setSignupTab(prev => !prev);
 
     (window.catalyst as any).initApp({
-      project_Id : "4939000000052001", //No I18N
-      zaid : "50024743074", //No I18N
-      auth_domain : "https://accounts.zohoportal.in",
+      project_Id : projectId,
+      zaid,
+      auth_domain : authDomain,
       is_appsail : "true",
       api_domain : ""
     },{
-      org_id: "60026071286" //No I18N
+      org_id: orgId
     });
     
     (window.catalyst as any).auth.signIn("signin-frame", {});

@@ -1,0 +1,13 @@
+{
+	"execution": {
+		"main": "index.js"
+	},
+	"deployment": {
+		"stack": "node20",
+		"name": "AppsailWarmerFunction",
+		"type": "job",
+		"env_variables": {
+			"FUNCTION_URL": "https://shareme-50024743074.development.catalystappsail.in"
+		}
+	}
+}

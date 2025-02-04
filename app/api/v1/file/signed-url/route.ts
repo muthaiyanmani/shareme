@@ -25,7 +25,8 @@ async function POST(req: NextRequest) {
         const app = catalyst.initialize({ headers }, {scope:"admin"});
 
         // Since sdk is not supported in the middleware, we are applying the rate limiting logic here
-        const cache =  app.cache().segment('4939000000055710');
+        const segmentId = process.env.CACHE_SEGMENT_ID;
+        const cache =  app.cache().segment(segmentId);
         const count = await cache.getValue(ip);
         const lastAccessedTime = parseInt(count);
 
