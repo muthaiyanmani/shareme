@@ -32,7 +32,7 @@ export default function SignInPage() {
             org_id: orgId
         });
 
-        (window.catalyst as any).auth.signIn("signin-frame", {});
+        (window.catalyst as any).auth.signIn("signin-frame", {signin_providers_only : true});
     }, [projectId, zaid, orgId, authDomain]);
 
     return <div className={cn("flex flex-col gap-6")}>
