@@ -2,7 +2,7 @@
 import { headers } from "next/headers";
 import catalyst from "zcatalyst-sdk-node";
 
-export async function createUser(prevState: unknown, formData: FormData) {
+async function createUser(prevState: unknown, formData: FormData) {
 
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
@@ -33,3 +33,5 @@ export async function createUser(prevState: unknown, formData: FormData) {
 
     return { ...(prevState as Record<string, unknown>), loading: false }
 }
+
+export { createUser };

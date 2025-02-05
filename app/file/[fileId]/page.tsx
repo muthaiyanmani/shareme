@@ -28,10 +28,10 @@ export default async function GetFilePage({
         const fileDetails = fileResp[0]?.Files;
         const objectKey = `${fileDetails?.ID}/${fileDetails?.FILE_NAME}`;
 
-        const stratusObject = app.stratus().bucket(bucketName).object(objectKey);
-        const objectMeta = await stratusObject.getDetails();
-        //const signatureUrl = await stratusObject.generateCacheSignedUrl(`${objectMeta.object_url}`);
-        
+        const stratusBucket = app.stratus().bucket(bucketName);
+        const objectMeta = await stratusBucket.object(objectKey).getDetails();
+        const signatureUrl:Record<string, string> = await stratusBucket.generatePreSignedUrl(`${objectKey}`,"GET", { expiryIn: `${60*60*5}`});
+        const downloadUrl = signatureUrl?.signature;
         const fileExtension = objectKey.split('.').pop() || 'txt';
 
         return <div  className="flex flex-col items-center justify-center h-[calc(100vh-200px)] text-slate-200">
@@ -43,7 +43,7 @@ export default async function GetFilePage({
 
             <p className="text-xs text-gray-400">{formatFileSize(objectMeta.size)}</p>
             <br />
-            <a href={`${objectMeta.object_url}?responseContentDisposition=attachment;filename="${fileDetails?.FILE_NAME}"`} download className="text-yellow-500 flex item gap-2"> <Download /> Download</a>
+            <a href={`${downloadUrl}`} download className="text-yellow-500 flex item gap-2"> <Download /> Download</a>
         </div>
     } catch (e) {
         console.error(e);
