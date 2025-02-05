@@ -29,7 +29,7 @@ export default function UploadFile() {
       setTimeout(() => {
         setCopied(false);
         // setOpenDialog(false)
-      }, 2000) // Reset copied state after 2 seconds
+      }, 2000) 
     } catch (err) {
       console.error("Failed to copy text: ", err)
     }
@@ -66,7 +66,6 @@ export default function UploadFile() {
     xhr.open("PUT", signedUrl, true);
     xhr.setRequestHeader("Content-Type", contentType);
 
-    // Track progress
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) {
         const percentCompleted = Math.round((event.loaded / event.total) * 100);
@@ -84,9 +83,13 @@ export default function UploadFile() {
       }
     };
 
-    xhr.onerror = () => toast("UPLOAD_FAILED", {
-      description: "An error occurred during the upload."
-    })
+    xhr.onerror = () => {
+      toast("UPLOAD_FAILED", {
+        description: "An error occurred during the upload."
+      })
+      setProgress(0);
+      setIsUploading(false);
+    }
 
     xhr.send(acceptedFiles[0]);
   }, []);

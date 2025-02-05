@@ -30,33 +30,28 @@ export default function Header() {
                     <div className="flex h-6 w-6 items-center justify-center rounded-md">
                         <Share2 className="h-5 w-5" />
                     </div>
-                    <h2 className="font-bold md:text-lg">DropIt</h2>
+                    <h2 className="font-bold text-base md:text-xl">DropIt</h2>
                 </Link>
 
-                {/* Desktop Navigation */}
-                <nav className="hidden md:flex items-center gap-8">
-                    {navLinks.map((link, index) => (
-                        link.href.startsWith('https://') ?
-                            <a key={index} href={link.href} target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
-                                {link.title}
-                            </a> :
-
-                            <Link
-                                key={index}
-                                href={link.href}
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                {link.title}
-                            </Link>
-                    ))}
-
-                </nav>
-
                 <div className="flex items-center gap-4">
-                    <Button className="hidden md:inline-flex">Sign Up</Button>
-                    {/* <ModeToggle /> */}
+                    {/* Desktop Navigation */}
+                    <nav className="hidden md:flex items-center gap-8 xl:gap-12">
+                        {navLinks.map((link, index) => (
+                            link.href.startsWith('https://') ?
+                                <a key={index} href={link.href} target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                                    {link.title}
+                                </a> :
 
-                    {/* Mobile Menu */}
+                                <Link
+                                    key={index}
+                                    href={link.href}
+                                    className="text-muted-foreground hover:text-foreground transition-colors"
+                                >
+                                    {link.title}
+                                </Link>
+                        ))}
+                    </nav>
+
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild className="md:hidden">
                             <Button variant="ghost" size="icon">
@@ -66,7 +61,7 @@ export default function Header() {
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                             <SheetHeader>
-                                <SheetTitle>Menu</SheetTitle>
+                                <SheetTitle>DropIt</SheetTitle>
                             </SheetHeader>
                             <nav className="flex flex-col gap-4 mt-8">
 
