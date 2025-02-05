@@ -5,6 +5,7 @@ import { AnimatedBackground } from "@/components/animated-background";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 export default function HomePage() {
@@ -22,7 +23,9 @@ export default function HomePage() {
               <br />
               <h4 className="text-base text-gray-400">Store and share of any files of any size, with an instant access whenever you need it.</h4>
               <br /> <br />
-              <Button variant={"outline"} className="font-semibold px-8 py-5 text-gray-200">Sign Up</Button>
+              <Link href={"/auth/signup"}> 
+                <Button variant={"outline"} className="font-semibold px-8 py-5 text-gray-200">Sign Up</Button>
+              </Link>
             </div>
             <div className="flex-1 flex p-2">
               <UploadFile />

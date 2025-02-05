@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build && node copy-assets.js",
     "start": "next start --port $X_ZOHO_CATALYST_LISTEN_PORT",
+    "serve": "npx catalyst serve --only appsail",
     "lint": "next lint"
   },
   "dependencies": {

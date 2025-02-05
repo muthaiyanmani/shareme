@@ -3,7 +3,7 @@
 	"build_path": ".",
 	"stack": "node20",
 	"catalyst_auth": true,
-	"login_redirect": "/",
+	"login_redirect": "/dashboard",
 	"env_variables": {},
 	"memory": 2048,
 	"scripts": {}

@@ -171,7 +171,7 @@ export default function UploadFile() {
                   </div>
                 }
                 <p className='my-2'>Uploading {progress}% </p>
-                <Progress value={progress} className='bg-white' />
+                <Progress value={progress} />
               </div>) : <><p className="text-blue-50 text-md mb-2">Drag and drop your files here.</p>
               <p className="text-blue-300">
                 Or,{" "}
