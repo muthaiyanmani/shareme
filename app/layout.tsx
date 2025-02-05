@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 
 const lato = Lato({
@@ -15,7 +13,7 @@ const lato = Lato({
 
 
 export const metadata: Metadata = {
-  title: "ShareMe",
+  title: "DropIt",
   description: "A simple file hosting and sharing platform",
 };
 
@@ -27,21 +25,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lato.className} antialiased relative min-h-screen bg-[url('/background.svg')] bg-cover bg-no-repeat bg-center`}
+        className={`${lato.className} antialiased relative min-h-screen`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
+          defaultTheme="dark"
           disableTransitionOnChange
         >
-         <div className="md:max-w-7xl max-w-sm mx-auto flex flex-col">
-         <Header />
-         <main className="flex-grow w-full">{children}</main>
-        
-         </div>
-         <Footer />
-         <Toaster />
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

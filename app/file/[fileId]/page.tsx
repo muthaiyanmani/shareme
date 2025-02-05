@@ -16,7 +16,7 @@ export default async function GetFilePage({
 
     const nextHeaders = await headers();
     const reqHeaders = Object.fromEntries(nextHeaders.entries());
-    const app = catalyst.initialize({ headers: reqHeaders });
+    const app = catalyst.initialize({ headers: reqHeaders },{scope:"admin"});
 
     try {
         const fileResp = await app.zcql().executeZCQLQuery(`SELECT * FROM Files WHERE ID='${fileId}'`);
@@ -28,9 +28,11 @@ export default async function GetFilePage({
         const fileDetails = fileResp[0]?.Files;
         const objectKey = `${fileDetails?.ID}/${fileDetails?.FILE_NAME}`;
 
-        const objectMeta = await app.stratus().bucket(bucketName).object(objectKey).getDetails();
+        const stratusObject = app.stratus().bucket(bucketName).object(objectKey);
+        const objectMeta = await stratusObject.getDetails();
+        //const signatureUrl = await stratusObject.generateCacheSignedUrl(`${objectMeta.object_url}`);
+        
         const fileExtension = objectKey.split('.').pop() || 'txt';
-        console.log(objectMeta)
 
         return <div  className="flex flex-col items-center justify-center h-[calc(100vh-200px)] text-slate-200">
             <div className="w-12 h-12 md:w-16 md:h-16">

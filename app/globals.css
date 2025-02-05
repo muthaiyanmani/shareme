@@ -70,3 +70,41 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+/* Original Space Background */
+.stars, .twinkling, .clouds {
+  position: absolute;
+  display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stars {
+  z-index: 0;
+  background: #000 url('https://i.imgur.com/YKY28eT.png') repeat top center;
+  animation: move-background 200s linear infinite;
+}
+
+.twinkling {
+  z-index: 1;
+  background: transparent url('https://i.imgur.com/XYMF4ca.png') repeat top center;
+  animation: move-background 100s linear infinite;
+}
+
+.clouds {
+  z-index: 2;
+  background: transparent url('https://i.imgur.com/mHbScrQ.png') repeat top center;
+  animation: move-background 300s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes move-background {
+  from { background-position: 0 0; }
+  to { background-position: 10000px 0; }
+}
