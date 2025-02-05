@@ -1,18 +1,13 @@
 import { headers } from "next/headers";
 import catalyst from "zcatalyst-sdk-node";
 import { redirect } from 'next/navigation'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 export default async function DashboardHome() {
-    const nextHeaders = await headers();
-    const reqHeaders = Object.fromEntries(nextHeaders.entries());
+  
 
-    const app = catalyst.initialize({ headers: reqHeaders });
-    const user = await app.userManagement().getCurrentUser();
-
-    if (!user) {
-        redirect(`/auth/signin?redirect=/dashboard`);
-        return;
-    }
-
-    return <p>Hello World</p>
+    return <h1>Dashboard</h1>
 }
