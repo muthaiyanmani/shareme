@@ -1,8 +1,9 @@
-import { Menu, Share2 } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import { useState } from "react";
+import BrandLogo from "./logo";
 
 
 export default function Header() {
@@ -26,12 +27,8 @@ export default function Header() {
     return <header >
         <div className="container">
             <div className="flex justify-between items-center py-4">
-                <Link href="/" className="flex items-center gap-2 font-medium">
-                    <div className="flex h-6 w-6 items-center justify-center rounded-md">
-                        <Share2 className="h-5 w-5" />
-                    </div>
-                    <h2 className="font-bold text-base md:text-xl">DropIt</h2>
-                </Link>
+
+                <BrandLogo />
 
                 <div className="flex items-center gap-4">
                     {/* Desktop Navigation */}
