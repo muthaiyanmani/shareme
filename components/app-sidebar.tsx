@@ -34,7 +34,7 @@ const data = {
         },
         {
           title: "API Keys",
-          url: "/dashboard/api-keys",
+          url: "/dashboard/keys",
         },
       ],
     }
