@@ -5,9 +5,8 @@
  */
 module.exports = async (jobRequest, context) => {
 	try{
-		const resp = await fetch("https://shareme-50024743074.development.catalystappsail.in");
-		const data = await resp.json();
-		console.log(data)
+		const { FUNCTION_URL } = process.env;
+		const resp = await fetch(FUNCTION_URL);
 		context.closeWithSuccess();
 	}catch(err){
 		console.log(err);
