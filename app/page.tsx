@@ -18,7 +18,7 @@ export default function HomePage() {
             <div className="w-full lg:w-1/2 text-center lg:text-left p-2">
               <div className="text-xl lg:text-6xl space-y-3 font-bold">
                 <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-pink-800 "> Drop your files</h1>
-                <h1> Share it in lighting fast</h1>
+                <h1> Share it in lightning fast</h1>
               </div>
               <br />
               <h4 className="text-base text-gray-400">Store and share of any files of any size, with an instant access whenever you need it.</h4>

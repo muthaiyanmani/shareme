@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import Script from "next/script";
 
 const lato = Lato({
   weight: ["300", "400", "700"],
@@ -22,11 +23,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const analyticsSecretKey = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || "";
   return (
     <html lang="en">
       <body
         className={`${lato.className} antialiased relative min-h-screen`}
       >
+        <Script defer src="https://cloud.umami.is/script.js" data-website-id={analyticsSecretKey}></Script>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
