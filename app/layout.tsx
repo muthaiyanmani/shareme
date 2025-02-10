@@ -23,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const analyticsSecretKey = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || "";
+  const analyticsSecretKey = process.env.NEXT_PUBLIC_ANALYTICS_ID || "";
   return (
     <html lang="en">
       <body
