@@ -48,7 +48,7 @@ export default function UploadFile() {
         description: "Invalid file. Please try again."
       })
       return;
-    } else if (fileSize > 10000000) {
+    } else if (fileSize > 10_73_74_18_240) {
       toast("FILE_TOO_LARGE", {
         description: "File is too large and should be less than 10GB."
       })

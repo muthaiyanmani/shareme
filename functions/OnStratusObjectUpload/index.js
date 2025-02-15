@@ -11,7 +11,7 @@ module.exports = async (event, context) => {
 
 		const fileDetails = response[0].Files;
 		await app.zcql().executeZCQLQuery(`UPDATE Files SET Files.IS_UPLOADED ='true' WHERE Files.ID='${fileId}'`);
-		context.close();
+		context.closeWithSuccess();
 	}catch(err){
 		console.error(err);
 		context.closeWithFailure();
