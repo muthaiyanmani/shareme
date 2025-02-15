@@ -29,7 +29,7 @@ export default function UploadFile() {
       setTimeout(() => {
         setCopied(false);
         // setOpenDialog(false)
-      }, 2000) 
+      }, 2000)
     } catch (err) {
       console.error("Failed to copy text: ", err)
     }
@@ -41,15 +41,28 @@ export default function UploadFile() {
 
     const fileName = acceptedFiles[0]?.name;
     const contentType = acceptedFiles[0]?.type;
-    
+    const fileSize = acceptedFiles[0]?.size;
+
+    if (!fileName || !contentType || !fileSize) {
+      toast("INVALID_FILE", {
+        description: "Invalid file. Please try again."
+      })
+      return;
+    } else if (fileSize > 10000000) {
+      toast("FILE_TOO_LARGE", {
+        description: "File is too large and should be less than 10GB."
+      })
+      return;
+    }
+
     let apiResp;
     try {
       const response = await fetch(`/api/v1/file/signed-url?file=${fileName}`, { method: "POST" });
 
-      if(!response.ok) {
+      if (!response.ok) {
         const error = await response.json();
         const errorData = error?.data;
-        
+
         toast(errorData.code, {
           description: errorData.message
         })
@@ -112,9 +125,9 @@ export default function UploadFile() {
 
       <div
         {...getRootProps()}
-        className="relative w-full max-w-lg aspect-square flex flex-col items-center justify-center cursor-pointer"
+        className="relative w-full max-w-md h-full aspect-square flex flex-col items-center justify-center cursor-pointer"
       >
-        <input disabled={openDialog} {...getInputProps()} />
+        <input disabled={openDialog} {...getInputProps()} multiple={false} />
 
         {/* Animated circles background */}
         <div className="absolute inset-0 flex items-center justify-center">
@@ -133,9 +146,13 @@ export default function UploadFile() {
         {/* Dotted circle and content */}
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative">
-
-            <svg className="md:w-28 md:h-28 text-blue-600" viewBox="0 0 100 100">
-              <motion.circle
+            <motion.svg
+              className="md:w-24 md:h-24 w-16 h-16 text-blue-600"
+              viewBox="0 0 100 100"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            >
+              <circle
                 cx="50"
                 cy="50"
                 r="45"
@@ -143,11 +160,8 @@ export default function UploadFile() {
                 stroke="#60a5fa"
                 strokeWidth="1"
                 strokeDasharray="4 4"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                className="origin-center"
               />
-            </svg>
+            </motion.svg>
 
             <div className="absolute inset-0 flex items-center justify-center">
               <Folder className="w-8 h-8 text-blue-300" />
@@ -163,8 +177,8 @@ export default function UploadFile() {
                     <ul className="list-none p-0">
                       {uploadedFiles.map((file, index) => (
                         <li key={index} className="flex items-center gap-1 overflow-hidden">
-                         <span className="truncate block w-24 md:w-40">{file.name}</span>
-                         <span className="text-xs text-gray-400">({formatFileSize(file.size)})</span>
+                          <span className="truncate block w-24 md:w-40">{file.name}</span>
+                          <span className="text-xs text-gray-400">({formatFileSize(file.size)})</span>
                         </li>
                       ))}
                     </ul>
@@ -205,13 +219,13 @@ export default function UploadFile() {
                 <AlertDialogTitle>Share the link</AlertDialogTitle>
                 <CircleX onClick={closeModal} className='cursor-pointer' />
               </div>
-             
+
               <AlertDialogDescription>
                 <p className='text-sm'>Copy the link below and share it with your friends</p>
                 <br />
-               
+
                 <div className="flex items-center space-x-2 mt-2">
-                <Input type="text" value={shareLink} className="flex-grow" disabled />
+                  <Input type="text" value={shareLink} className="flex-grow" disabled />
                   <Button
                     onClick={copyToClipboard}
                     variant={"default"}

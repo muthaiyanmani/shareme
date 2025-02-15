@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import catalyst from "zcatalyst-sdk-node";
-import { v4 as uuid } from "uuid";
+import { nanoid } from 'nanoid';
 
 async function POST(req: NextRequest) {
     const fileName = req.nextUrl.searchParams?.get('file');
@@ -19,7 +19,7 @@ async function POST(req: NextRequest) {
     
         const headers = Object.fromEntries(req.headers.entries());
         const ip = req.headers.get('x-forwarded-for')!;
-        const keyPrefix = uuid();
+        const keyPrefix = nanoid(8); // Adjust length as needed
         const objectKey =`${keyPrefix}/${fileName}`;
     
         const app = catalyst.initialize({ headers }, {scope:"admin"});

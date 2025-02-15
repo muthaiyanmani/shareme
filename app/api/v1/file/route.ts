@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import catalyst from "zcatalyst-sdk-node";
-import { v4 as uuid } from "uuid";
+import { nanoid } from 'nanoid'
 
 
 async function POST(req: NextRequest) {
@@ -22,7 +22,7 @@ async function POST(req: NextRequest) {
 
         const headers = Object.fromEntries(req.headers.entries());
         const fileName = req.headers.get('x-file-name') || `file-${Date.now()}.zip`;
-        const keyPrefix = uuid();
+        const keyPrefix = nanoid(8);
         const objectKey = `${keyPrefix}/${fileName}`;
 
 

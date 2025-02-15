@@ -21,9 +21,9 @@ export default function HomePage() {
                 <h1> Share it in lightning fast</h1>
               </div>
               <br />
-              <h4 className="text-base text-gray-400">Store and share of any files of any size, with an instant access whenever you need it.</h4>
+              <h4 className=" text-gray-400">Store and share of any files of any size, with an instant access whenever you need it.</h4>
               <br /> <br />
-              <Link href={"/auth/signup"}> 
+              <Link href={"/auth/signup"}>
                 <Button variant={"outline"} className="font-semibold px-8 py-5 text-gray-200">Sign Up</Button>
               </Link>
             </div>
