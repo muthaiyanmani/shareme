@@ -22,7 +22,7 @@ export default function SignInPage() {
 
     useEffect(() => {
         loadAuthIframe();
-    }, [projectId, zaid, orgId, authDomain]);
+    });
 
     const loadAuthIframe = () => {
         if (window.catalyst) {

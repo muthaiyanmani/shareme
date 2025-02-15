@@ -1,13 +1,9 @@
-import { Menu } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { useState } from "react";
 import BrandLogo from "./logo";
 
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
         {
@@ -49,7 +45,7 @@ export default function Header() {
                         ))}
                     </nav>
 
-                    <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                    {/* <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild className="md:hidden">
                             <Button variant="ghost" size="icon">
                                 <Menu className="h-5 w-5" />
@@ -85,7 +81,7 @@ export default function Header() {
                                 </Button>
                             </nav>
                         </SheetContent>
-                    </Sheet>
+                    </Sheet> */}
                 </div>
             </div>
         </div>

@@ -31,6 +31,8 @@ export default function HomePage() {
               <UploadFile />
             </div>
           </div>
+          <br />
+          <br />
           <Footer />
         </div>
       </AnimatedBackground>

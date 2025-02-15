@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lato.className} antialiased relative min-h-screen`}
+        className={`${lato.className} antialiased relative flex flex-col min-h-screen`}
       >
         <Script defer src="https://cloud.umami.is/script.js" data-website-id={analyticsSecretKey}></Script>
         <ThemeProvider
@@ -35,7 +35,7 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          {children}
+          <main className="flex-grow">{children}</main>
           <Toaster />
         </ThemeProvider>
       </body>
